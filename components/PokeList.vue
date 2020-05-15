@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <div v-for="(pokemon, index) in pokemons" :key="index" class="mx-auto">
-        <nuxt-link to="/detail">
+        <nuxt-link :to="Path(pokemon.name)">
           <button class="btn btn-color">
             <img :src="imgUrl + pokeID[index] + '.png'" class="w-20 h-20 mx-auto" />
             <h4>{{ pokemon.name }}</h4>
@@ -34,9 +34,6 @@ export default {
   },
   created() {
     this.fetchData()
-    this.clearUrl()
-    console.log('already clear url')
-    console.log('list pokeUrl = ' + this.pokeUrl)
   },
   methods: {
     async fetchData() {
@@ -47,11 +44,8 @@ export default {
         this.pokemons.push(pokemon)
       })
     },
-    defineUrl(url) {
-      this.pokeUrl = url
-    },
-    clearUrl() {
-      this.pokeUrl = ''
+    Path(pokeName) {
+      return '/detail/' + pokeName
     }
   }
 }
