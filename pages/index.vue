@@ -1,77 +1,36 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        Nuxt-Tailwind-WS
-      </h1>
-      <h2 class="subtitle">
-        I still have no idea what I&#39;m doing but use tailwind instead
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="flex-row">
+    <h1 class="my-10 text-center text-5xl">
+      POKEDEX
+    </h1>
+    <poke-list
+      :api-url="apiURL"
+      :img-url="imgURL"></poke-list>
+      <!-- <poke-detail
+      v-if="IsDetailShow"
+      :poke-url="pokeURL"
+      :img-url="imgURL"
+      @closeDetail="closeDetail"></poke-detail> -->
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+import PokeList from '~/components/PokeList.vue'
+/* import PokeDetail from '~/components/PokeDetail.vue' */
 export default {
   components: {
-    Logo
+    PokeList/* ,
+    PokeDetail */
+  },
+  data: () => {
+    return {
+      apiURL: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
+      imgURL: 'https://pokeres.bastionbot.org/images/pokemon/',
+      pokeURL: ''
+    }
   }
 }
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-  @apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
