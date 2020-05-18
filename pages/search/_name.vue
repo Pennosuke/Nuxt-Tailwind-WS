@@ -22,7 +22,7 @@ export default {
   data: () => {
     return {
       apiURL: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
-      imgURL: 'https://pokeres.bastionbot.org/images/pokemon/',
+      imgURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       pokeURL: '',
       searchName: ''
     }
