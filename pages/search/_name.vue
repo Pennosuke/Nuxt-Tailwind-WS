@@ -1,36 +1,43 @@
 <template>
   <div class="flex-row">
-    <HomeButton></HomeButton>
-    <searchbar></searchbar>
-    <poke-list
-      :api-url="apiURL"
-      :img-url="imgURL"
-      :search-name="searchName"></poke-list>
+    <home-button></home-button>
+    <search-bar></search-bar>
+    <poke-list :poke-id="pokeID" :pokemons="pokemons"></poke-list>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import HomeButton from '~/components/HomeButton.vue'
 import PokeList from '~/components/PokeList.vue'
-import Searchbar from '~/components/Searchbar.vue'
+import SearchBar from '~/components/Searchbar.vue'
 export default {
   components: {
     HomeButton,
     PokeList,
-    Searchbar
+    SearchBar
+  },
+  async fetch() {
+    const { data } = await axios.get(this.apiUrl)
+    data.results.forEach((pokemon) => {
+      if (this.nameMatch(pokemon.name)) {
+        this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
+        this.pokemons.push(pokemon)
+      }
+    })
   },
   data: () => {
     return {
-      apiURL: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
-      imgURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
-      pokeURL: '',
-      searchName: ''
+      apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
+      pokeID: [],
+      pokemons: []
     }
   },
-  created() {
-    this.searchName = this.$route.params.name
-    console.log('$route.params.name = ' + this.$route.params.name)
-    console.log('searchName = ' + this.searchName)
+  methods: {
+    nameMatch(pokeName) {
+      const regex = new RegExp('^' + this.$route.params.name, 'i')
+      return regex.test(pokeName)
+    }
   }
 }
 </script>

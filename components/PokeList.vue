@@ -5,7 +5,7 @@
         <div v-for="(pokemon, index) in pokemons" :key="index" class="mx-auto">
           <nuxt-link :to="detail(pokemon.name)">
             <button class="btn btn-color">
-              <img :src="imgUrl + pokeID[index] + '.png'" class="w-20 h-20 mx-auto" />
+              <img :src="imgUrl + pokeId[index] + '.png'" class="w-20 h-20 mx-auto" />
               <h4>{{ pokemon.name }}</h4>
             </button>
           </nuxt-link>
@@ -26,62 +26,25 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   props: {
-    apiUrl: {
-      type: String,
-      default: ''
+    pokeId: {
+      type: Array,
+      default: () => []
     },
-    imgUrl: {
-      type: String,
-      default: ''
-    },
-    searchName: {
-      type: String,
-      default: ''
-    }
-  },
-  async fetch() {
-    this.currentUrl = this.apiUrl
-    if (this.searchName === '') {
-      console.log('HOME')
-      const { data } = await axios.get(this.currentUrl)
-      data.results.forEach((pokemon) => {
-        this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-        this.pokemons.push(pokemon)
-      })
-    } else {
-      while (true) {
-        const { data } = await axios.get(this.currentUrl)
-        if (data.next == null) {
-          break
-        }
-        data.results.forEach((pokemon) => {
-          if (this.nameMatch(pokemon.name)) {
-            this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-            this.pokemons.push(pokemon)
-          }
-        })
-        this.currentUrl = data.next
-      }
+    pokemons: {
+      type: Array,
+      default: () => []
     }
   },
   data: () => {
     return {
-      pokeID: [],
-      pokemons: [],
-      pokeUrl: '',
-      currentUrl: ''
+      imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
     }
   },
   methods: {
     detail(pokeName) {
       return '/detail/' + pokeName
-    },
-    nameMatch(pokeName) {
-      const regex = new RegExp('^' + this.searchName, 'i')
-      return regex.test(pokeName)
     }
   }
 }
