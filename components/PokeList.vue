@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   props: {
     apiUrl: {
@@ -25,6 +26,13 @@ export default {
       default: ''
     }
   },
+  async fetch() {
+    const { data } = await axios.get(this.apiUrl)
+    data.results.forEach((pokemon) => {
+      this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
+      this.pokemons.push(pokemon)
+    })
+  },
   data: () => {
     return {
       pokeID: [],
@@ -32,18 +40,7 @@ export default {
       pokeUrl: ''
     }
   },
-  created() {
-    this.fetchData()
-  },
   methods: {
-    async fetchData() {
-      const response = await fetch(this.apiUrl)
-      const data = await response.json()
-      data.results.forEach((pokemon) => {
-        this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-        this.pokemons.push(pokemon)
-      })
-    },
     Path(pokeName) {
       return '/detail/' + pokeName
     }

@@ -1,38 +1,38 @@
 <template>
   <div class="container mx-auto w-2/3">
-    <img :src="imgUrl + pokeID + '.png'" class="w-40 h-40 mx-auto" />
+    <img :src="imgUrl + pokemon.id + '.png'" class="w-40 h-40 mx-auto" />
     <div class="grid grid-cols-1">
-      <h2 class="mx-auto">
+      <h1 class="m-auto text-5xl">
         {{ pokemon.name }}
-      </h2>
+      </h1>
     </div>
     <div class="divide-y divide-gray-400">
       <div class="grid grid-cols-2">
-        <h4 class="mx-auto">
-          Base Experience
-        </h4>
-        <h4 class="mx-auto">
-          {{ pokemon.base_experience }}
-        </h4>
-      </div>
-      <div class="grid grid-cols-2">
-        <h4 class="mx-auto">
+        <h4 class="m-auto">
           Height
         </h4>
-        <h4 class="mx-auto">
+        <h4 class="m-auto">
           {{ pokemon.height }}
         </h4>
       </div>
       <div class="grid grid-cols-2">
-        <h4 class="mx-auto">
+        <h4 class="m-auto">
           Weight
         </h4>
-        <h4 class="mx-auto">
+        <h4 class="m-auto">
           {{ pokemon.weight }}
         </h4>
       </div>
       <div class="grid grid-cols-2">
-        <h4 class="mx-auto">
+        <h4 class="m-auto">
+          Base Experience
+        </h4>
+        <h4 class="m-auto">
+          {{ pokemon.base_experience }}
+        </h4>
+      </div>
+      <div class="grid sm:grid-cols-1 md:grid-cols-2">
+        <h4 class="m-auto">
           Type
         </h4>
         <div class="flex row justify-center">
@@ -43,8 +43,8 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2">
-        <h4 class="mx-auto">
+      <div class="grid sm:grid-cols-1 md:grid-cols-2">
+        <h4 class="m-auto">
           Ability
         </h4>
         <div class="flex row justify-center">
@@ -55,39 +55,55 @@
           </div>
         </div>
       </div>
+      <!-- <div class="grid grid-cols-1">
+        <h4 class="m-auto">
+          Stats
+        </h4>
+      </div>
+      <div>
+        <table class="table-fixed">
+          <thead>
+            <tr v-for>
+              <th class="w-1/6"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2">Intro to CSS</td>
+              <td class="border px-4 py-2">Adam</td>
+              <td class="border px-4 py-2">858</td>
+            </tr>
+            <tr class="bg-gray-100">
+              <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on Design</td>
+              <td class="border px-4 py-2">Adam</td>
+              <td class="border px-4 py-2">112</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
     </div>
-    <nuxt-link to="/">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ">
-        Close
-      </button>
-    </nuxt-link>
+    <div class="grid grid-cols-1">
+      <nuxt-link to="/" class="mx-auto">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ">
+          Close
+        </button>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  async fetch() {
+    const { data } = await axios.get(this.pokeUrl + this.$route.params.name + '/')
+    this.pokemon = data
+  },
   data: () => {
     return {
       pokeUrl: 'https://pokeapi.co/api/v2/pokemon/',
       imgUrl: 'https://pokeres.bastionbot.org/images/pokemon/',
-      pokemon: {},
-      pokeID: ''
-    }
-  },
-  created() {
-    this.fetchData()
-  },
-  methods: {
-    async fetchData() {
-      const response = await fetch(this.pokeUrl + this.$route.params.name + '/')
-      const data = await response.json()
-      this.pokemon = data
-      this.pokeID = this.pokemon.id
-      console.log('this.$route.params.id = ' + this.$route.params.name)
-      console.log('detail pokeUrl = ' + this.pokeUrl + this.$route.params.name + '/')
-      console.log('data = ' + data)
-      console.log('this.pokemon = ' + this.pokemon)
-      console.log('this.pokeID = ' + this.pokeID)
+      pokemon: {}
     }
   }
 }
