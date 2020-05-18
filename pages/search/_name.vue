@@ -26,6 +26,11 @@ export default {
       pokeURL: '',
       searchName: ''
     }
+  },
+  created() {
+    this.searchName = this.$route.params.name
+    console.log('$route.params.name = ' + this.$route.params.name)
+    console.log('searchName = ' + this.searchName)
   }
 }
 </script>
