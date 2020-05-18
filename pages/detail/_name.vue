@@ -35,7 +35,7 @@
         <h4 class="m-auto">
           Type
         </h4>
-        <div class="flex row justify-center">
+        <div class="flex row justify-center flex-wrap">
           <div v-for="(value, index) in pokemon.types" :key="index" :data-color="value.type.name" class="type type-color">
             <h5 class="text-center">
               {{ value.type.name }}
@@ -47,7 +47,7 @@
         <h4 class="m-auto">
           Ability
         </h4>
-        <div class="flex row justify-center">
+        <div class="flex row justify-center flex-wrap">
           <div v-for="(value, index) in pokemon.abilities" :key="index" class="type">
             <h5 class="text-center">
               {{ value.ability.name }}
@@ -55,32 +55,33 @@
           </div>
         </div>
       </div>
-      <!-- <div class="grid grid-cols-1">
+      <div class="grid grid-cols-1">
         <h4 class="m-auto">
           Stats
         </h4>
-      </div>
-      <div>
         <table class="table-fixed">
           <thead>
-            <tr v-for>
-              <th class="w-1/6"></th>
+            <tr>
+              <th class="w-2/3"></th>
+              <th class="w-1/3"></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="border px-4 py-2">Intro to CSS</td>
-              <td class="border px-4 py-2">Adam</td>
-              <td class="border px-4 py-2">858</td>
-            </tr>
-            <tr class="bg-gray-100">
-              <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on Design</td>
-              <td class="border px-4 py-2">Adam</td>
-              <td class="border px-4 py-2">112</td>
+            <tr v-for="(value, index) in pokestat" :key="index">
+              <td class="border px-4 py-2 bg-gray-200">
+                <h5 class="text-center">
+                  {{ value.stat.name }}
+                </h5>
+              </td>
+              <td class="border px-4 py-2">
+                <h5 class="text-center">
+                  {{ value.base_stat }}
+                </h5>
+              </td>
             </tr>
           </tbody>
         </table>
-      </div> -->
+      </div>
     </div>
     <div class="grid grid-cols-1">
       <nuxt-link to="/" class="mx-auto">
@@ -98,12 +99,14 @@ export default {
   async fetch() {
     const { data } = await axios.get(this.pokeUrl + this.$route.params.name + '/')
     this.pokemon = data
+    this.pokestat = data.stats.slice().reverse()
   },
   data: () => {
     return {
       pokeUrl: 'https://pokeapi.co/api/v2/pokemon/',
       imgUrl: 'https://pokeres.bastionbot.org/images/pokemon/',
-      pokemon: {}
+      pokemon: {},
+      pokestat: []
     }
   }
 }
