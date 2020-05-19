@@ -28,7 +28,7 @@ export default {
     Pagination
   },
   async fetch() {
-    const { data } = await axios.get(this.apiUrl)
+    const { data } = await axios.get(this.apiUrl + this.offset(this.$route.params.id))
     this.totalPage = Math.floor(data.count / 20)
     data.results.forEach((pokemon) => {
       this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
@@ -38,7 +38,7 @@ export default {
   },
   data: () => {
     return {
-      apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
+      apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=',
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       pokeID: [],
       pokemons: [],
@@ -57,6 +57,7 @@ export default {
   },
   methods: {
     paginationStyle() {
+      this.currentPage = parseInt(this.$route.params.id)
       this.firstMiddle = Math.max(this.currentPage - this.beforeCurrent, 1)
       this.lastMiddle = Math.min(this.currentPage + this.afterCurrent, this.totalPage)
       if (this.currentPage - 1 - this.beforeCurrent < 1) {
@@ -84,6 +85,9 @@ export default {
       for (let i = this.firstMiddle; i <= this.lastMiddle; i++) {
         this.middlePages.push(i)
       }
+    },
+    offset(pageID) {
+      return String((parseInt(pageID) - 1) * 20)
     }
   }
 }
