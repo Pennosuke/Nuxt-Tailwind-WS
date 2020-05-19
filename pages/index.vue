@@ -29,7 +29,7 @@ export default {
   },
   async fetch() {
     const { data } = await axios.get(this.apiUrl)
-    this.totalPage = Math.floor(data.count / 20)
+    this.totalPage = Math.ceil(data.count / 20)
     data.results.forEach((pokemon) => {
       this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
       this.pokemons.push(pokemon)
@@ -90,7 +90,5 @@ export default {
 </script>
 
 <style>
-.searchbar {
-  @apply rounded-full w-full py-2 px-3 text-gray-700 border shadow appearance-none leading-tight outline-none;
-}
+
 </style>

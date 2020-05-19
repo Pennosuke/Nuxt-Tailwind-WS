@@ -29,7 +29,7 @@ export default {
   },
   async fetch() {
     const { data } = await axios.get(this.apiUrl + this.offset(this.$route.params.id))
-    this.totalPage = Math.floor(data.count / 20)
+    this.totalPage = Math.ceil(data.count / 20)
     data.results.forEach((pokemon) => {
       this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
       this.pokemons.push(pokemon)
