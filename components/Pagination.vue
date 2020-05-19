@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center my-12">
     <div class="flex text-gray-700">
-      <nuxt-link v-if="currentPage > 1" :to="pagination(currentPage - 1)" class="arrow-button hover:bg-teal-200">
+      <nuxt-link v-if="currentPage > 1" :to="pagination(currentPage - 1)" class="arrow-button md:h-12 w-12 hover:bg-teal-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -32,29 +32,29 @@
         </svg>
       </div>
       <div class="flex h-12 font-medium rounded-full bg-gray-200">
-        <nuxt-link v-if="showFirstPage" :to="pagination(1)" class="flex align-center justify-center page-button hover:bg-teal-200">
+        <nuxt-link v-if="showFirstPage" :to="pagination(1)" class="w-12 md:flex align-center justify-center page-button hover:bg-teal-200 hidden">
           1
         </nuxt-link>
-        <div v-if="showLeftDots" class="flex align-center justify-center page-button">
+        <div v-if="showLeftDots" class="w-12 md:flex align-center justify-center page-button hidden">
           ...
         </div>
-        <div v-for="(page,index) in middlePages" :key="index" class="flex align-center justify-center">
-          <div v-if="page===currentPage" class="flex align-center justify-center page-button bg-teal-600 text-white">
+        <div v-for="(page,index) in middlePages" :key="index" class="md:flex align-center justify-center hidden">
+          <div v-if="page===currentPage" class="w-12 md:flex align-center justify-center page-button bg-teal-600 text-white hidden">
             {{ page }}
           </div>
-          <nuxt-link v-else :to="pagination(page)" class="flex align-center justify-center page-button hover:bg-teal-200">
+          <nuxt-link v-else :to="pagination(page)" class="w-12 md:flex align-center justify-center page-button hover:bg-teal-200 hidden">
             {{ page }}
           </nuxt-link>
         </div>
-        <div v-if="showRightDots" class="flex align-center justify-center page-button">
+        <div v-if="showRightDots" class="w-12 md:flex align-center justify-center page-button hidden">
           ...
         </div>
-        <nuxt-link v-if="showLastPage" :to="pagination(totalPage)" class="flex align-center justify-center page-button hover:bg-teal-200">
+        <nuxt-link v-if="showLastPage" :to="pagination(totalPage)" class="w-12 md:flex align-center justify-center page-button hover:bg-teal-200 hidden">
           {{ totalPage }}
         </nuxt-link>
-        <!-- <div class="w-12 h-12 md:hidden flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full bg-teal-600 text-white">
-          3
-        </div> -->
+        <div class="w-12 h-12 md:hidden flex justify-center items-center leading-5 transition duration-150 ease-in rounded-full bg-teal-600 text-white">
+          {{ currentPage }}
+        </div>
       </div>
       <nuxt-link v-if="currentPage < totalPage" :to="pagination(currentPage + 1)" class="arrow-button hover:bg-teal-200">
         <svg
@@ -134,11 +134,11 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 .arrow-button{
   @apply h-12 w-12 mr-1 flex justify-center items-center rounded-full bg-gray-200;
 }
 .page-button{
-  @apply w-12 items-center leading-5 transition duration-150 ease-in rounded-full;
+  @apply items-center leading-5 transition duration-150 ease-in rounded-full;
 }
 </style>
