@@ -2,7 +2,7 @@
   <div class="flex-row">
     <home-button></home-button>
     <search-bar></search-bar>
-    <poke-list :poke-id="pokeID" :pokemons="pokemons"></poke-list>
+    <poke-list :poke-id="pokeID" :pokemons="pokemons" :img-url="imgUrl"></poke-list>
   </div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
   data: () => {
     return {
       apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
+      imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       pokeID: [],
       pokemons: []
     }

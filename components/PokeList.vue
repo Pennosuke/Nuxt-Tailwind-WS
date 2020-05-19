@@ -15,7 +15,7 @@
     <div v-else>
       <div class="flex-row">
         <h4 class="text-center mt-24 text-5xl text-gray-700">
-          Not found
+          No results found
         </h4>
         <h4 class="text-center text-5xl text-gray-700">
           ;_;
@@ -35,11 +35,10 @@ export default {
     pokemons: {
       type: Array,
       default: () => []
-    }
-  },
-  data: () => {
-    return {
-      imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
+    },
+    imgUrl: {
+      type: String,
+      default: ''
     }
   },
   methods: {
