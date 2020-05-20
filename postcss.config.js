@@ -9,7 +9,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     './components/HomeButton.vue',
     './components/Logo.vue',
     './components/Pagination.vue',
-    './components/Pokelist.vue',
+    './components/PokeList.vue',
     './components/Searchbar.vue'
     // etc.
   ],
