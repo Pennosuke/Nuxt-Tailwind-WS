@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center my-12">
     <div class="flex text-gray-700">
-      <nuxt-link v-if="currentPage > 1" :to="pagination(currentPage - 1)" class="arrow-button md:h-12 w-12 hover:bg-teal-200">
+      <nuxt-link v-if="currentPage > 1" :to="pagination(currentPage - 1)" class="arrow-button mr-1 hover:bg-teal-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -16,7 +16,7 @@
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </nuxt-link>
-      <div v-else class="arrow-button text-gray-500">
+      <div v-else class="arrow-button mr-1 text-gray-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -31,32 +31,29 @@
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </div>
-      <div class="flex h-12 font-medium rounded-full bg-gray-200">
-        <nuxt-link v-if="showFirstPage" :to="pagination(1)" class="w-12 md:flex align-center justify-center page-button hover:bg-teal-200 hidden">
+      <div class="flex h-6 sm:h-8 md:h-10 lg:h-12 font-medium rounded-full bg-gray-300">
+        <nuxt-link v-if="showFirstPage" :to="pagination(1)" class="flex align-center justify-center page-button hover:bg-teal-200">
           1
         </nuxt-link>
-        <div v-if="showLeftDots" class="w-12 md:flex align-center justify-center page-button hidden">
+        <div v-if="showLeftDots" class="flex align-center justify-center page-button">
           ...
         </div>
-        <div v-for="(page,index) in middlePages" :key="index" class="md:flex align-center justify-center hidden">
-          <div v-if="page===currentPage" class="w-12 md:flex align-center justify-center page-button bg-teal-600 text-white hidden">
+        <div v-for="(page,index) in middlePages" :key="index" class="flex align-center justify-center">
+          <div v-if="page===currentPage" class="flex align-center justify-center page-button bg-teal-600 text-white">
             {{ page }}
           </div>
-          <nuxt-link v-else :to="pagination(page)" class="w-12 md:flex align-center justify-center page-button hover:bg-teal-200 hidden">
+          <nuxt-link v-else :to="pagination(page)" class="flex align-center justify-center page-button hover:bg-teal-200">
             {{ page }}
           </nuxt-link>
         </div>
-        <div v-if="showRightDots" class="w-12 md:flex align-center justify-center page-button hidden">
+        <div v-if="showRightDots" class="flex align-center justify-center page-button">
           ...
         </div>
-        <nuxt-link v-if="showLastPage" :to="pagination(totalPage)" class="w-12 md:flex align-center justify-center page-button hover:bg-teal-200 hidden">
+        <nuxt-link v-if="showLastPage" :to="pagination(totalPage)" class="flex align-center justify-center page-button hover:bg-teal-200">
           {{ totalPage }}
         </nuxt-link>
-        <div class="w-12 h-12 md:hidden flex justify-center items-center leading-5 transition duration-150 ease-in rounded-full bg-teal-600 text-white">
-          {{ currentPage }}
-        </div>
       </div>
-      <nuxt-link v-if="currentPage < totalPage" :to="pagination(currentPage + 1)" class="arrow-button hover:bg-teal-200">
+      <nuxt-link v-if="currentPage < totalPage" :to="pagination(currentPage + 1)" class="arrow-button ml-1 hover:bg-teal-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -71,7 +68,7 @@
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </nuxt-link>
-      <div v-else class="arrow-button text-gray-500">
+      <div v-else class="arrow-button ml-1 text-gray-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -136,9 +133,33 @@ export default {
 
 <style scope>
 .arrow-button{
-  @apply h-12 w-12 mr-1 flex justify-center items-center rounded-full bg-gray-200;
+  @apply flex justify-center items-center rounded-full bg-gray-300 h-6 w-6;
 }
 .page-button{
-  @apply items-center leading-5 transition duration-150 ease-in rounded-full;
+  @apply items-center leading-5 transition duration-150 ease-in rounded-full w-6 text-sm;
+}
+@media (min-width: 640px) {
+  .arrow-button{
+    @apply flex justify-center items-center rounded-full bg-gray-300 h-8 w-8;
+  }
+  .page-button{
+    @apply items-center leading-5 transition duration-150 ease-in rounded-full w-8 text-base;
+  }
+}
+@media (min-width: 768px) {
+  .arrow-button{
+    @apply flex justify-center items-center rounded-full bg-gray-300 h-10 w-10;
+  }
+  .page-button{
+    @apply items-center leading-5 transition duration-150 ease-in rounded-full w-10 text-base;
+  }
+}
+@media (min-width: 1024px) {
+  .arrow-button{
+    @apply flex justify-center items-center rounded-full bg-gray-300 h-12 w-12;
+  }
+  .page-button{
+    @apply items-center leading-5 transition duration-150 ease-in rounded-full w-12 text-lg;
+  }
 }
 </style>

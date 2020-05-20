@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-1">
+      <div class="grid grid-cols-1 mb-10">
         <h4 class="m-auto">
           Stats
         </h4>
@@ -69,7 +69,7 @@
           </thead>
           <tbody>
             <tr v-for="(value, index) in pokestat" :key="index">
-              <td class="border px-4 py-2 bg-gray-200">
+              <td class="border px-4 py-2 bg-teal-200">
                 <h5 class="text-center">
                   {{ value.stat.name }}
                 </h5>
@@ -83,13 +83,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="grid grid-cols-1">
-      <nuxt-link to="/" class="mx-auto">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-10">
-          Close
-        </button>
-      </nuxt-link>
     </div>
   </div>
 </template>

@@ -54,7 +54,7 @@ export default {
   @apply font-medium py-4 px-4 my-6 rounded-full w-48 h-48 shadow-xl;
 }
 .btn-color {
-  @apply bg-gray-200 text-blue-700;
+  @apply bg-gray-300 text-blue-700;
 }
 .btn-color:hover {
   color: white;

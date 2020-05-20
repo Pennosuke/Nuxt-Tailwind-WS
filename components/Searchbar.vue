@@ -1,5 +1,5 @@
 <template>
-  <form class="mx-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg">
+  <form class="mx-auto w-2/3 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
     <div class="flex items-center rounded-full border border-teal-500 py-2">
       <input v-model="search_name" class="ml-3 w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search pokemon name...">
       <nuxt-link :to="search(search_name)">
@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     search(pokeName) {
-      console.log('current name = ' + pokeName)
       return '/search/' + pokeName
     }
   }
