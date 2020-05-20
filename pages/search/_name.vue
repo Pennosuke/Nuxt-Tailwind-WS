@@ -2,7 +2,11 @@
   <div class="flex-row">
     <home-button></home-button>
     <search-bar></search-bar>
-    <poke-list :poke-id="pokeID" :pokemons="pokemons" :img-url="imgUrl"></poke-list>
+    <poke-list
+      :poke-id="pokeID"
+      :pokemons="pokemons"
+      :img-url="imgUrl"
+      :is-fetch-complete="isFetchComplete"></poke-list>
   </div>
 </template>
 
@@ -25,11 +29,13 @@ export default {
         this.pokemons.push(pokemon)
       }
     })
+    this.isFetchComplete = true
   },
   data: () => {
     return {
       apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964',
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
+      isFetchComplete: false,
       pokeID: [],
       pokemons: []
     }

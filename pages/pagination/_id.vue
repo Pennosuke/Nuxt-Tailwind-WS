@@ -2,7 +2,11 @@
   <div class="flex-row">
     <home-button></home-button>
     <search-bar></search-bar>
-    <poke-list :poke-id="pokeID" :pokemons="pokemons" :img-url="imgUrl"></poke-list>
+    <poke-list
+      :poke-id="pokeID"
+      :pokemons="pokemons"
+      :img-url="imgUrl"
+      :is-fetch-complete="isFetchComplete"></poke-list>
     <pagination
       :current-page="currentPage"
       :total-page="totalPage"
@@ -35,11 +39,13 @@ export default {
       this.pokemons.push(pokemon)
     })
     this.paginationStyle()
+    this.isFetchComplete = true
   },
   data: () => {
     return {
       apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=',
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
+      isFetchComplete: false,
       pokeID: [],
       pokemons: [],
       totalPage: 0,

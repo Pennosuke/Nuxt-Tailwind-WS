@@ -12,6 +12,13 @@
         </div>
       </div>
     </div>
+    <div v-else-if="isFetchComplete === false">
+      <div class="flex-row">
+        <h4 class="text-center mt-24 text-5xl text-gray-700">
+          Loading...
+        </h4>
+      </div>
+    </div>
     <div v-else>
       <div class="flex-row">
         <h4 class="text-center mt-24 text-5xl text-gray-700">
@@ -39,6 +46,10 @@ export default {
     imgUrl: {
       type: String,
       default: ''
+    },
+    isFetchComplete: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
