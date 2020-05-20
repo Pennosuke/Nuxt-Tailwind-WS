@@ -20,6 +20,7 @@
     "postcss-preset-env": "^6.7.0"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.2.0",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/tailwindcss": "^1.4.1",
@@ -30,11 +31,5 @@
     "eslint-plugin-nuxt": ">=0.4.2",
     "jest": "^24.1.0",
     "vue-jest": "^4.0.0-0"
-  },
-  "postcss": {
-    "plugins": {
-      "tailwindcss": "./tailwind.config.js",
-      "autoprefixer": {}
-    }
   }
 }
