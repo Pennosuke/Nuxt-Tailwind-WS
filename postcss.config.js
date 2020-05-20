@@ -5,7 +5,12 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     './pages/detail/_name.vue',
     './pages/pagination/_id.vue',
     './pages/search/_name.vue',
-    'pages/index.vue'
+    './pages/index.vue',
+    './components/HomeButton.vue',
+    './components/Logo.vue',
+    './components/Pagination.vue',
+    './components/Pokelist.vue',
+    './components/Searchbar.vue'
     // etc.
   ],
 
