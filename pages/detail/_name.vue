@@ -49,7 +49,7 @@
           Ability
         </h4>
         <div class="flex row justify-center flex-wrap">
-          <div v-for="(value, index) in pokemon.abilities" :key="index" class="type">
+          <div v-for="(value, index) in pokemon.abilities" :key="index" class="type type-color">
             <h5 class="text-center">
               {{ value.ability.name }}
             </h5>
@@ -112,61 +112,64 @@ export default {
 
 <style scoped>
 .type {
-  @apply font-bold py-1 px-4 rounded-full text-white w-32 m-2 bg-gray-800;
+  @apply font-bold py-1 px-4 rounded-full text-white w-32 m-2;
 }
-.type-color[data-color = "bug"] {
-  background-color: #6D7815;
+.type-color {
+  @apply bg-gray-800;
 }
-.type-color[data-color = "dark"] {
-  background-color: #49392F;
+.type-color[data-color='bug'] {
+  background-color: #A8B820;
 }
-.type-color[data-color = "dragon"] {
-  background-color: #4924A1;
+.type-color[data-color='dark'] {
+  background-color: #705848;
 }
-.type-color[data-color = "electric"] {
-  background-color: #A1871F;
+.type-color[data-color='dragon'] {
+  background-color: #7038F8;
 }
-.type-color[data-color = "fairy"] {
-  background-color: #9B6470;
+.type-color[data-color='electric'] {
+  background-color: #F8D030;
 }
-.type-color[data-color = "fighting"] {
-  background-color: #7D1F1A;
+.type-color[data-color='fairy'] {
+  background-color: #EE99AC;
 }
-.type-color[data-color = "fire"] {
-  background-color: #9C531F;
+.type-color[data-color='fighting'] {
+  background-color: #C03028;
 }
-.type-color[data-color = "flying"] {
-  background-color: #6D5E9C;
+.type-color[data-color='fire'] {
+  background-color: #F08030;
 }
-.type-color[data-color = "ghost"] {
-  background-color: #493963;
+.type-color[data-color='flying'] {
+  background-color: #A890F0;
 }
-.type-color[data-color = "grass"] {
-  background-color: #4E8234;
+.type-color[data-color='ghost'] {
+  background-color: #705898;
 }
-.type-color[data-color = "ground"] {
-  background-color: #927D44;
+.type-color[data-color='grass'] {
+  background-color: #78C850;
 }
-.type-color[data-color = "ice"] {
-  background-color: #638D8D;
+.type-color[data-color='ground'] {
+  background-color: #E0C068;
 }
-.type-color[data-color = "normal"] {
-  background-color: #6D6D4E;
+.type-color[data-color='ice'] {
+  background-color: #98D8D8;
 }
-.type-color[data-color = "poison"] {
-  background-color: #682A68;
+.type-color[data-color='normal'] {
+  background-color: #A8A878;
 }
-.type-color[data-color = "psychic"] {
-  background-color: #A13959;
+.type-color[data-color='poison'] {
+  background-color: #A040A0;
 }
-.type-color[data-color = "rock"] {
-  background-color: #786824;
+.type-color[data-color='psychic'] {
+  background-color: #F85888;
 }
-.type-color[data-color = "steel"] {
-  background-color: #787887;
+.type-color[data-color='rock'] {
+  background-color: #B8A038;
 }
-.type-color[data-color = "water"] {
-  background-color: #445E9C;
+.type-color[data-color='steel'] {
+  background-color: #B8B8D0;
+}
+.type-color[data-color='water'] {
+  background-color: #6890F0;
 }
 .ability {
   margin-bottom: 10px;
