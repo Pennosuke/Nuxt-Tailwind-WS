@@ -3,7 +3,6 @@
     <home-button></home-button>
     <search-bar></search-bar>
     <poke-list
-      :poke-id="pokeId"
       :pokemons="pokemons"
       :img-url="imgUrl"
       :is-fetch-complete="isFetchComplete"></poke-list>
@@ -36,14 +35,13 @@ export default {
   async asyncData() {
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
     const { data } = await axios.get(apiUrl)
+    const { results } = data
 
-    const pokemons = data.results.map((result) => {
-      return {
-        name: result.name,
-        url: result.url,
-        id: splitId(result.url)
-      }
-    })
+    const pokemons = results.map(({ name, url }) => ({
+      name,
+      url,
+      id: splitId(url)
+    }))
     return {
       pokemons,
       totalPage: Math.ceil(data.count / 20),
