@@ -3,7 +3,7 @@
     <home-button></home-button>
     <search-bar></search-bar>
     <poke-list
-      :poke-id="pokeID"
+      :poke-id="pokeId"
       :pokemons="pokemons"
       :img-url="imgUrl"
       :is-fetch-complete="isFetchComplete"></poke-list>
@@ -31,24 +31,29 @@ export default {
     SearchBar,
     Pagination
   },
-  async fetch() {
-    const { data } = await axios.get(this.apiUrl)
-    this.totalPage = Math.ceil(data.count / 20)
+  async asyncData() {
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+    const { data } = await axios.get(apiUrl)
+    const pokeIdResult = []
+    const pokemonsResult = []
     data.results.forEach((pokemon) => {
-      this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-      this.pokemons.push(pokemon)
+      pokeIdResult.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
+      pokemonsResult.push(pokemon)
     })
-    this.paginationStyle()
-    this.isFetchComplete = true
-  },
-  data: () => {
     return {
-      apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
+      pokeId: pokeIdResult,
+      pokemons: pokemonsResult,
+      totalPage: Math.ceil(data.count / 20),
+      isFetchComplete: true
+    }
+  },
+  data () {
+    return {
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       isFetchComplete: false,
-      pokeID: [],
-      pokemons: [],
+      pokeId: [],
       totalPage: 0,
+      pokemons: [],
       currentPage: 1,
       beforeCurrent: 2,
       afterCurrent: 2,
@@ -60,6 +65,9 @@ export default {
       firstMiddle: 1,
       lastMiddle: 3
     }
+  },
+  created () {
+    this.paginationStyle()
   },
   methods: {
     paginationStyle() {
@@ -94,7 +102,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
