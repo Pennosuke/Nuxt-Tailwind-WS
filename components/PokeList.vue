@@ -5,7 +5,7 @@
         <div v-for="(pokemon, index) in pokemons" :key="index" class="mx-auto">
           <nuxt-link :to="detail(pokemon.name)">
             <button class="btn btn-color">
-              <img :src="imgUrl + pokeId[index] + '.png'" class="w-20 h-20 mx-auto" />
+              <img :src="imgUrl + pokemon.id + '.png'" class="w-20 h-20 mx-auto" />
               <h4>{{ pokemon.name }}</h4>
             </button>
           </nuxt-link>
@@ -35,10 +35,6 @@
 <script>
 export default {
   props: {
-    pokeId: {
-      type: Array,
-      default: () => []
-    },
     pokemons: {
       type: Array,
       default: () => []

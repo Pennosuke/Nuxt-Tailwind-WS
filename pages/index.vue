@@ -24,6 +24,8 @@ import HomeButton from '~/components/HomeButton.vue'
 import PokeList from '~/components/PokeList.vue'
 import SearchBar from '~/components/Searchbar.vue'
 import Pagination from '~/components/Pagination.vue'
+import { splitId } from '~/utils/pokemonMapper'
+
 export default {
   components: {
     HomeButton,
@@ -34,15 +36,16 @@ export default {
   async asyncData() {
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
     const { data } = await axios.get(apiUrl)
-    const pokeIdResult = []
-    const pokemonsResult = []
-    data.results.forEach((pokemon) => {
-      pokeIdResult.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-      pokemonsResult.push(pokemon)
+
+    const pokemons = data.results.map((result) => {
+      return {
+        name: result.name,
+        url: result.url,
+        id: splitId(result.url)
+      }
     })
     return {
-      pokeId: pokeIdResult,
-      pokemons: pokemonsResult,
+      pokemons,
       totalPage: Math.ceil(data.count / 20),
       isFetchComplete: true
     }
