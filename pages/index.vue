@@ -3,7 +3,6 @@
     <home-button></home-button>
     <search-bar></search-bar>
     <poke-list
-      :poke-id="pokeID"
       :pokemons="pokemons"
       :img-url="imgUrl"
       :is-fetch-complete="isFetchComplete"></poke-list>
@@ -24,6 +23,8 @@ import HomeButton from '~/components/HomeButton.vue'
 import PokeList from '~/components/PokeList.vue'
 import SearchBar from '~/components/Searchbar.vue'
 import Pagination from '~/components/Pagination.vue'
+import { splitId } from '~/utils/pokemonMapper'
+
 export default {
   components: {
     HomeButton,
@@ -31,24 +32,29 @@ export default {
     SearchBar,
     Pagination
   },
-  async fetch() {
-    const { data } = await axios.get(this.apiUrl)
-    this.totalPage = Math.ceil(data.count / 20)
-    data.results.forEach((pokemon) => {
-      this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-      this.pokemons.push(pokemon)
-    })
-    this.paginationStyle()
-    this.isFetchComplete = true
-  },
-  data: () => {
+  async asyncData() {
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+    const { data } = await axios.get(apiUrl)
+    const { results } = data
+
+    const pokemons = results.map(({ name, url }) => ({
+      name,
+      url,
+      id: splitId(url)
+    }))
     return {
-      apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
+      pokemons,
+      totalPage: Math.ceil(data.count / 20),
+      isFetchComplete: true
+    }
+  },
+  data () {
+    return {
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       isFetchComplete: false,
-      pokeID: [],
-      pokemons: [],
+      pokeId: [],
       totalPage: 0,
+      pokemons: [],
       currentPage: 1,
       beforeCurrent: 2,
       afterCurrent: 2,
@@ -60,6 +66,9 @@ export default {
       firstMiddle: 1,
       lastMiddle: 3
     }
+  },
+  created () {
+    this.paginationStyle()
   },
   methods: {
     paginationStyle() {
@@ -94,7 +103,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
