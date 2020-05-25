@@ -2,48 +2,46 @@
   <div class="flex-row">
     <home-button></home-button>
     <search-bar></search-bar>
-    <poke-list
-      :poke-id="pokeID"
+    <pokemon-list
       :pokemons="pokemons"
       :img-url="imgUrl"
-      :is-loading="isLoading"></poke-list>
+      :is-loading="isLoading"></pokemon-list>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import HomeButton from '~/components/HomeButton.vue'
-import PokeList from '~/components/PokeList.vue'
+import PokemonList from '~/components/PokemonList.vue'
 import SearchBar from '~/components/Searchbar.vue'
+import { splitId } from '~/utils/pokemonMapper'
 export default {
   components: {
     HomeButton,
-    PokeList,
+    PokemonList,
     SearchBar
   },
-  async fetch() {
-    const { data } = await axios.get(this.apiUrl)
-    data.results.forEach((pokemon) => {
-      if (this.nameMatch(pokemon.name)) {
-        this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-        this.pokemons.push(pokemon)
-      }
-    })
-    this.isLoading = false
+  async asyncData({ route }) {
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964'
+    const { data } = await axios.get(apiUrl)
+    const { results } = data
+    const regex = new RegExp(`^${route.params.name}`, 'i')
+    const pokemons = results.filter(({ name }) => regex.test(name)).map(({ name, url }) => ({
+      name,
+      url,
+      id: splitId(url)
+    }))
+    return {
+      pokemons,
+      totalPage: Math.ceil(data.count / 20),
+      isLoading: false
+    }
   },
   data() {
     return {
       apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964',
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
-      isLoading: true,
-      pokeID: [],
-      pokemons: []
-    }
-  },
-  methods: {
-    nameMatch(pokeName) {
-      const regex = new RegExp('^' + this.$route.params.name, 'i')
-      return regex.test(pokeName)
+      isLoading: true
     }
   }
 }

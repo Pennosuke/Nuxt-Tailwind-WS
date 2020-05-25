@@ -2,10 +2,10 @@
   <div class="flex-row">
     <home-button></home-button>
     <search-bar></search-bar>
-    <poke-list
+    <pokemon-list
       :pokemons="pokemons"
       :img-url="imgUrl"
-      :is-loading="isLoading"></poke-list>
+      :is-loading="isLoading"></pokemon-list>
     <pagination
       :current-page="currentPage"
       :total-page="totalPage"></pagination>
@@ -15,7 +15,7 @@
 <script>
 import axios from 'axios'
 import HomeButton from '~/components/HomeButton.vue'
-import PokeList from '~/components/PokeList.vue'
+import PokemonList from '~/components/PokemonList.vue'
 import SearchBar from '~/components/Searchbar.vue'
 import Pagination from '~/components/Pagination.vue'
 import { splitId } from '~/utils/pokemonMapper'
@@ -26,12 +26,12 @@ export default {
   },
   components: {
     HomeButton,
-    PokeList,
+    PokemonList,
     SearchBar,
     Pagination
   },
   async asyncData({ route }) {
-    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=' + String((parseInt(route.query.id) - 1) * 20)
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon/?offset=${String((parseInt(route.query.id) - 1) * 20)}`
     const { data } = await axios.get(apiUrl)
     const { results } = data
     const pokemons = results.map(({ name, url }) => ({

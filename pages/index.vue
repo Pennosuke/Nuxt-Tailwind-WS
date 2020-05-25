@@ -2,10 +2,10 @@
   <div class="flex-row">
     <home-button></home-button>
     <search-bar></search-bar>
-    <poke-list
+    <pokemon-list
       :is-loading="isLoading"
       :pokemons="pokemons"
-      :img-url="imgUrl"></poke-list>
+      :img-url="imgUrl"></pokemon-list>
     <pagination
       :current-page="currentPage"
       :total-page="totalPage"></pagination>
@@ -15,7 +15,7 @@
 <script>
 import axios from 'axios'
 import HomeButton from '~/components/HomeButton.vue'
-import PokeList from '~/components/PokeList.vue'
+import PokemonList from '~/components/PokemonList.vue'
 import SearchBar from '~/components/Searchbar.vue'
 import Pagination from '~/components/Pagination.vue'
 import { splitId } from '~/utils/pokemonMapper'
@@ -23,7 +23,7 @@ import { splitId } from '~/utils/pokemonMapper'
 export default {
   components: {
     HomeButton,
-    PokeList,
+    PokemonList,
     SearchBar,
     Pagination
   },

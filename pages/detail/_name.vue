@@ -94,17 +94,19 @@ export default {
   components: {
     HomeButton
   },
-  async fetch() {
-    const { data } = await axios.get(this.pokeUrl + this.$route.params.name + '/')
-    this.pokemon = data
-    this.pokestat = data.stats.slice().reverse()
-  },
-  data: () => {
+  async asyncData({ route }) {
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon/${route.params.name}/`
+    const { data } = await axios.get(apiUrl)
+    const pokemon = data
+    const pokestat = data.stats.slice().reverse()
     return {
-      pokeUrl: 'https://pokeapi.co/api/v2/pokemon/',
-      imgUrl: 'https://pokeres.bastionbot.org/images/pokemon/',
-      pokemon: {},
-      pokestat: []
+      pokemon,
+      pokestat
+    }
+  },
+  data() {
+    return {
+      imgUrl: 'https://pokeres.bastionbot.org/images/pokemon/'
     }
   }
 }
