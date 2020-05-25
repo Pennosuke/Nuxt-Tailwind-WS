@@ -49,9 +49,6 @@ export default {
       totalPage: 0,
       currentPage: 1
     }
-  },
-  watch: {
-    '$route.query': '$fetch'
   }
 }
 </script>

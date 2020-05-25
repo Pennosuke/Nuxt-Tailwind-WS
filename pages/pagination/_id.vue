@@ -20,6 +20,10 @@ import SearchBar from '~/components/Searchbar.vue'
 import Pagination from '~/components/Pagination.vue'
 import { splitId } from '~/utils/pokemonMapper'
 export default {
+  watchQuery: ['id'],
+  key (route) {
+    return route.fullPath
+  },
   components: {
     HomeButton,
     PokeList,

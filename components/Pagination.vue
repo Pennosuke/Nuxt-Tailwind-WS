@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center my-12">
     <div class="flex text-gray-700">
-      <router-link
+      <nuxt-link
         v-if="currentPage > 1"
         :to="{ path: 'pagination', query: { id: String(currentPage - 1) } }"
         class="arrow-button mr-1 hover:bg-teal-200">
@@ -18,7 +18,7 @@
           class="feather feather-chevron-left w-6 h-6">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
-      </router-link>
+      </nuxt-link>
       <div v-else class="arrow-button mr-1 text-gray-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -35,12 +35,12 @@
         </svg>
       </div>
       <div class="flex h-6 sm:h-8 md:h-10 lg:h-12 font-medium rounded-full bg-gray-300">
-        <router-link
+        <nuxt-link
           v-if="showFirstPage"
           :to="{ path: 'pagination', query: { id: String(1) } }"
           class="flex align-center justify-center page-button hover:bg-teal-200">
           1
-        </router-link>
+        </nuxt-link>
         <div v-if="showLeftDots" class="flex align-center justify-center page-button">
           ...
         </div>
@@ -48,24 +48,24 @@
           <div v-if="page===currentPage" class="flex align-center justify-center page-button bg-teal-600 text-white">
             {{ page }}
           </div>
-          <router-link
+          <nuxt-link
             v-else
             :to="{ path: 'pagination', query: { id: String(page) } }"
             class="flex align-center justify-center page-button hover:bg-teal-200">
             {{ page }}
-          </router-link>
+          </nuxt-link>
         </div>
         <div v-if="showRightDots" class="flex align-center justify-center page-button">
           ...
         </div>
-        <router-link
+        <nuxt-link
           v-if="showLastPage"
           :to="{ path: 'pagination', query: { id: String(totalPage) } }"
           class="flex align-center justify-center page-button hover:bg-teal-200">
           {{ totalPage }}
-        </router-link>
+        </nuxt-link>
       </div>
-      <router-link
+      <nuxt-link
         v-if="currentPage < totalPage"
         :to="{ path: 'pagination', query: { id: String(currentPage + 1) } }"
         class="arrow-button ml-1 hover:bg-teal-200">
@@ -82,7 +82,7 @@
           class="feather feather-chevron-right w-6 h-6">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
-      </router-link>
+      </nuxt-link>
       <div v-else class="arrow-button ml-1 text-gray-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -132,8 +132,6 @@ export default {
   },
   methods: {
     paginationStyle() {
-      console.log('this.totalPage', this.totalPage)
-      console.log('this.currentPage', this.currentPage)
       this.firstMiddle = Math.max(this.currentPage - this.beforeCurrent, 1)
       this.lastMiddle = Math.min(this.currentPage + this.afterCurrent, this.totalPage)
       if (this.currentPage - 1 - this.beforeCurrent < 1) {
