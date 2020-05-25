@@ -6,7 +6,7 @@
       :poke-id="pokeID"
       :pokemons="pokemons"
       :img-url="imgUrl"
-      :is-fetch-complete="isFetchComplete"></poke-list>
+      :is-loading="isLoading"></poke-list>
   </div>
 </template>
 
@@ -29,13 +29,13 @@ export default {
         this.pokemons.push(pokemon)
       }
     })
-    this.isFetchComplete = true
+    this.isLoading = false
   },
-  data: () => {
+  data() {
     return {
       apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964',
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
-      isFetchComplete: false,
+      isLoading: true,
       pokeID: [],
       pokemons: []
     }

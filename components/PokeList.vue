@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="isFetchComplete === false">
+    <div v-else-if="isLoading">
       <div class="flex-row">
         <h4 class="text-center mt-24 text-5xl text-gray-700">
           Loading...
@@ -43,9 +43,9 @@ export default {
       type: String,
       default: ''
     },
-    isFetchComplete: {
+    isLoading: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   methods: {

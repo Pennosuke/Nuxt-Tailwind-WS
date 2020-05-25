@@ -1,7 +1,11 @@
 <template>
   <form class="mx-auto w-2/3 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
     <div class="flex items-center rounded-full border border-teal-500 py-2">
-      <input v-model="search_name" class="ml-3 w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Search pokemon name...">
+      <input
+        v-model="search_name"
+        class="ml-3 w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
+        type="text"
+        placeholder="Search pokemon name...">
       <nuxt-link v-if="search_name !== ''" :to="search(search_name)">
         <button class="mr-3 flex-shrink-0 py-2 px-2 rounded-full bg-transparent hover:bg-gray-400" type="button">
           <svg
