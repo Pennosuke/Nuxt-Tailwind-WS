@@ -20,7 +20,7 @@ import SearchBar from '~/components/Searchbar.vue'
 import Pagination from '~/components/Pagination.vue'
 import { splitId } from '~/utils/pokemonMapper'
 export default {
-  watchQuery: ['id'],
+  watchQuery: ['page'],
   key (route) {
     return route.fullPath
   },
@@ -31,7 +31,7 @@ export default {
     Pagination
   },
   async asyncData({ route }) {
-    const apiUrl = `https://pokeapi.co/api/v2/pokemon/?offset=${String((parseInt(route.query.id) - 1) * 20)}`
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon/?offset=${String((parseInt(route.query.page) - 1) * 20)}`
     const { data } = await axios.get(apiUrl)
     const { results } = data
     const pokemons = results.map(({ name, url }) => ({
@@ -55,7 +55,7 @@ export default {
     }
   },
   created() {
-    this.currentPage = parseInt(this.$route.query.id)
+    this.currentPage = parseInt(this.$route.query.page)
   }
 }
 </script>
