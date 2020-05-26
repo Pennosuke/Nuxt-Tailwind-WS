@@ -16,6 +16,10 @@ import PokemonList from '~/components/PokemonList.vue'
 import SearchBar from '~/components/Searchbar.vue'
 import { splitId } from '~/utils/pokemonMapper'
 export default {
+  watchQuery: ['name'],
+  key (route) {
+    return route.fullPath
+  },
   components: {
     HomeButton,
     PokemonList,
@@ -25,7 +29,7 @@ export default {
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964'
     const { data } = await axios.get(apiUrl)
     const { results } = data
-    const regex = new RegExp(`^${route.params.name}`, 'i')
+    const regex = new RegExp(`^${route.query.name}`, 'i')
     const pokemons = results.filter(({ name }) => regex.test(name)).map(({ name, url }) => ({
       name,
       url,
@@ -39,7 +43,6 @@ export default {
   },
   data() {
     return {
-      apiUrl: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964',
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       isLoading: true
     }

@@ -2,11 +2,13 @@
   <form class="mx-auto w-2/3 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
     <div class="flex items-center rounded-full border border-teal-500 py-2">
       <input
-        v-model="search_name"
-        class="ml-3 w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
+        v-model="searchText"
         type="text"
-        placeholder="Search pokemon name...">
-      <nuxt-link v-if="search_name !== ''" :to="search(search_name)">
+        class="ml-3 w-full text-gray-700 py-1 px-2 leading-tight focus:outline-none"
+        placeholder="Search pokemon name..."
+        @keyup.enter="searchByEnter(searchText)">
+      <input class="hidden">
+      <nuxt-link v-if="searchText" :to="{ path: 'search', query: { name: searchText } }">
         <button class="mr-3 flex-shrink-0 py-2 px-2 rounded-full bg-transparent hover:bg-gray-400" type="button">
           <svg
             class="text-gray-700 h-4 w-4 fill-current"
@@ -34,14 +36,16 @@
 
 <script>
 export default {
-  data: () => {
+  data() {
     return {
-      search_name: ''
+      searchText: ''
     }
   },
   methods: {
-    search(pokeName) {
-      return '/search/' + pokeName
+    searchByEnter(pokemonName) {
+      if (pokemonName !== '') {
+        this.$router.push({ path: 'search', query: { name: pokemonName } })
+      }
     }
   }
 }

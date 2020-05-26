@@ -42,7 +42,7 @@ export default {
       isLoading: false
     }
   },
-  data () {
+  data() {
     return {
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       isLoading: true,
