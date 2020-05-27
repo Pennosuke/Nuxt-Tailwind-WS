@@ -3,7 +3,7 @@
     <div v-if="pokemons.length > 0">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div v-for="(pokemon, index) in pokemons" :key="index" class="mx-auto">
-          <nuxt-link :to="detail(pokemon.name)">
+          <nuxt-link :to="{ name: 'detail-name', params: { name: pokemon.name } }">
             <button class="btn btn-color">
               <img :src="imgUrl + pokemon.id + '.png'" class="w-20 h-20 mx-auto" />
               <h4>{{ pokemon.name }}</h4>
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="isFetchComplete === false">
+    <div v-else-if="isLoading">
       <div class="flex-row">
         <h4 class="text-center mt-24 text-5xl text-gray-700">
           Loading...
@@ -43,14 +43,9 @@ export default {
       type: String,
       default: ''
     },
-    isFetchComplete: {
+    isLoading: {
       type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    detail(pokeName) {
-      return '/detail/' + pokeName
+      default: true
     }
   }
 }

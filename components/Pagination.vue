@@ -1,7 +1,10 @@
 <template>
-  <div class="flex flex-col items-center my-12">
+  <div class="flex flex-col items-center pt-10">
     <div class="flex text-gray-700">
-      <nuxt-link v-if="currentPage > 1" :to="pagination(currentPage - 1)" class="arrow-button mr-1 hover:bg-teal-200">
+      <nuxt-link
+        v-if="currentPage > 1"
+        :to="{ path: 'pagination', query: { page: String(currentPage - 1) } }"
+        class="arrow-button mr-1 hover:bg-teal-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -32,7 +35,10 @@
         </svg>
       </div>
       <div class="flex h-6 sm:h-8 md:h-10 lg:h-12 font-medium rounded-full bg-gray-300">
-        <nuxt-link v-if="showFirstPage" :to="pagination(1)" class="flex align-center justify-center page-button hover:bg-teal-200">
+        <nuxt-link
+          v-if="showFirstPage"
+          :to="{ path: 'pagination', query: { page: String(1) } }"
+          class="flex align-center justify-center page-button hover:bg-teal-200">
           1
         </nuxt-link>
         <div v-if="showLeftDots" class="flex align-center justify-center page-button">
@@ -42,18 +48,27 @@
           <div v-if="page===currentPage" class="flex align-center justify-center page-button bg-teal-600 text-white">
             {{ page }}
           </div>
-          <nuxt-link v-else :to="pagination(page)" class="flex align-center justify-center page-button hover:bg-teal-200">
+          <nuxt-link
+            v-else
+            :to="{ path: 'pagination', query: { page: String(page) } }"
+            class="flex align-center justify-center page-button hover:bg-teal-200">
             {{ page }}
           </nuxt-link>
         </div>
         <div v-if="showRightDots" class="flex align-center justify-center page-button">
           ...
         </div>
-        <nuxt-link v-if="showLastPage" :to="pagination(totalPage)" class="flex align-center justify-center page-button hover:bg-teal-200">
+        <nuxt-link
+          v-if="showLastPage"
+          :to="{ path: 'pagination', query: { page: String(totalPage) } }"
+          class="flex align-center justify-center page-button hover:bg-teal-200">
           {{ totalPage }}
         </nuxt-link>
       </div>
-      <nuxt-link v-if="currentPage < totalPage" :to="pagination(currentPage + 1)" class="arrow-button ml-1 hover:bg-teal-200">
+      <nuxt-link
+        v-if="currentPage < totalPage"
+        :to="{ path: 'pagination', query: { page: String(currentPage + 1) } }"
+        class="arrow-button ml-1 hover:bg-teal-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -97,35 +112,53 @@ export default {
     totalPage: {
       type: Number,
       default: 0
-    },
-    showFirstPage: {
-      type: Boolean,
-      default: false
-    },
-    showLeftDots: {
-      type: Boolean,
-      default: false
-    },
-    middlePages: {
-      type: Array,
-      default: () => []
-    },
-    showRightDots: {
-      type: Boolean,
-      default: false
-    },
-    showLastPage: {
-      type: Boolean,
-      default: false
     }
   },
-  data: () => {
+  data() {
     return {
+      beforeCurrent: 2,
+      afterCurrent: 2,
+      showFirstPage: false,
+      showLeftDots: false,
+      showRightDots: false,
+      showLastPage: false,
+      middlePages: [],
+      firstMiddle: 1,
+      lastMiddle: 5
     }
+  },
+  created() {
+    this.paginationStyle()
   },
   methods: {
-    pagination(ID) {
-      return '/pagination/' + String(ID)
+    paginationStyle() {
+      this.firstMiddle = Math.max(this.currentPage - this.beforeCurrent, 1)
+      this.lastMiddle = Math.min(this.currentPage + this.afterCurrent, this.totalPage)
+      if (this.currentPage - 1 - this.beforeCurrent < 1) {
+        this.lastMiddle = Math.min(1 + this.beforeCurrent + this.afterCurrent, this.totalPage)
+        this.showFirstPage = false
+        this.showLeftDots = false
+      } else if (this.currentPage - 1 - this.beforeCurrent === 1) {
+        this.showFirstPage = true
+        this.showLeftDots = false
+      } else if (this.currentPage - 1 - this.beforeCurrent > 1) {
+        this.showFirstPage = true
+        this.showLeftDots = true
+      }
+      if (this.totalPage - this.currentPage - this.afterCurrent < 1) {
+        this.firstMiddle = Math.max(this.totalPage - this.beforeCurrent - this.afterCurrent, 1)
+        this.showLastPage = false
+        this.showRightDots = false
+      } else if (this.totalPage - this.currentPage - this.afterCurrent === 1) {
+        this.showLastPage = true
+        this.showRightDots = false
+      } else if (this.totalPage - this.currentPage - this.afterCurrent > 1) {
+        this.showLastPage = true
+        this.showRightDots = true
+      }
+      for (let i = this.firstMiddle; i <= this.lastMiddle; i++) {
+        this.middlePages.push(i)
+      }
     }
   }
 }
