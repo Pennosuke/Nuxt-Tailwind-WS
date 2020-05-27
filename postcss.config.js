@@ -3,14 +3,15 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
   // Specify the paths to all of the template files in your project
   content: [
     './pages/detail/_name.vue',
-    './pages/pagination/_id.vue',
+    './pages/pagination/_page.vue',
     './pages/search/_name.vue',
     './pages/index.vue',
-    './components/HomeButton.vue',
+    './components/homeButton.vue',
     './components/Logo.vue',
-    './components/Pagination.vue',
-    './components/PokeList.vue',
-    './components/Searchbar.vue',
+    './components/pagination.vue',
+    './components/pokemonList.vue',
+    './components/searchBar.vue',
+    './components/searchBarButton.vue',
     './layouts/default.vue'
     // etc.
   ],
