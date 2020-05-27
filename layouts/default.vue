@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import HomeButton from '~/components/HomeButton.vue'
+import homeButton from '~/components/homeButton.vue'
 export default {
   components: {
-    HomeButton
+    homeButton
   }
 }
 </script>
