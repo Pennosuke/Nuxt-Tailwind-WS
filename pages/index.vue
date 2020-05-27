@@ -36,6 +36,7 @@ export default {
   },
   data() {
     return {
+      temp: '',
       imgUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
       isLoading: true,
       totalPage: 0,
