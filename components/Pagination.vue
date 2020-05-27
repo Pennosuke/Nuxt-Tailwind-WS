@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center my-12">
+  <div class="flex flex-col items-center pt-10">
     <div class="flex text-gray-700">
       <nuxt-link
         v-if="currentPage > 1"

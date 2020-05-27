@@ -1,8 +1,18 @@
 <template>
-  <div>
+  <div class="py-10">
+    <home-button></home-button>
     <nuxt />
   </div>
 </template>
+
+<script>
+import HomeButton from '~/components/HomeButton.vue'
+export default {
+  components: {
+    HomeButton
+  }
+}
+</script>
 
 <style>
 html {

@@ -1,6 +1,5 @@
 <template>
   <div class="flex-row">
-    <home-button></home-button>
     <search-bar></search-bar>
     <pokemon-list
       :pokemons="pokemons"
@@ -14,7 +13,6 @@
 
 <script>
 import axios from 'axios'
-import HomeButton from '~/components/HomeButton.vue'
 import PokemonList from '~/components/PokemonList.vue'
 import SearchBar from '~/components/Searchbar.vue'
 import Pagination from '~/components/Pagination.vue'
@@ -25,7 +23,6 @@ export default {
     return route.fullPath
   },
   components: {
-    HomeButton,
     PokemonList,
     SearchBar,
     Pagination

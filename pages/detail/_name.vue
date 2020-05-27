@@ -1,6 +1,5 @@
 <template>
   <div class="container mx-auto w-2/3">
-    <HomeButton></HomeButton>
     <img :src="imgUrl + pokemon.id + '.png'" class="w-40 h-40 mx-auto" />
     <div class="grid grid-cols-1">
       <h1 class="m-auto text-5xl">
@@ -89,11 +88,7 @@
 
 <script>
 import axios from 'axios'
-import HomeButton from '~/components/HomeButton.vue'
 export default {
-  components: {
-    HomeButton
-  },
   async asyncData({ route }) {
     const apiUrl = `https://pokeapi.co/api/v2/pokemon/${route.params.name}/`
     const { data } = await axios.get(apiUrl)
