@@ -27,9 +27,6 @@ export default {
       searchText: ''
     }
   },
-  created() {
-    console.log('this.searchText', this.searchText)
-  },
   methods: {
     searchByEnter(pokemonName) {
       if (pokemonName !== '') {

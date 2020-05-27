@@ -13,28 +13,23 @@
 
 <script>
 import axios from 'axios'
-import PokemonList from '~/components/PokemonList.vue'
-import SearchBar from '~/components/Searchbar.vue'
-import Pagination from '~/components/Pagination.vue'
-import { splitId } from '~/utils/pokemonMapper'
+import pokemonList from '~/components/pokemonList.vue'
+import searchBar from '~/components/searchBar.vue'
+import pagination from '~/components/pagination.vue'
+import { pokemonMapper } from '~/utils/pokemonMapper'
 
 export default {
   components: {
-    PokemonList,
-    SearchBar,
-    Pagination
+    pokemonList,
+    searchBar,
+    pagination
   },
   async asyncData() {
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
     const { data } = await axios.get(apiUrl)
     const { results } = data
-    const pokemons = results.map(({ name, url }) => ({
-      name,
-      url,
-      id: splitId(url)
-    }))
     return {
-      pokemons,
+      results,
       totalPage: Math.ceil(data.count / 20),
       isLoading: false
     }
@@ -45,6 +40,11 @@ export default {
       isLoading: true,
       totalPage: 0,
       currentPage: 1
+    }
+  },
+  computed: {
+    pokemons() {
+      return pokemonMapper(this.results)
     }
   }
 }
