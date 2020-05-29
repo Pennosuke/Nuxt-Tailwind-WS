@@ -3,7 +3,7 @@
     <div class="flex text-gray-700">
       <nuxt-link
         v-if="currentPage > 1"
-        :to="{ path: 'pagination', query: { page: String(currentPage - 1) } }"
+        :to="{ query: { page: String(currentPage - 1) } }"
         class="arrow-button mr-1 hover:bg-teal-200 focus:outline-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@
       <div class="flex h-6 sm:h-8 md:h-10 lg:h-12 font-medium rounded-full bg-gray-300">
         <nuxt-link
           v-if="showFirstPage"
-          :to="{ path: 'pagination', query: { page: String(1) } }"
+          :to="{ query: { page: String(1) } }"
           class="flex align-center justify-center page-button hover:bg-teal-200 focus:outline-none">
           1
         </nuxt-link>
@@ -50,7 +50,7 @@
           </div>
           <nuxt-link
             v-else
-            :to="{ path: 'pagination', query: { page: String(page) } }"
+            :to="{ query: { page: String(page) } }"
             class="flex align-center justify-center page-button hover:bg-teal-200 focus:outline-none">
             {{ page }}
           </nuxt-link>
@@ -60,14 +60,14 @@
         </div>
         <nuxt-link
           v-if="showLastPage"
-          :to="{ path: 'pagination', query: { page: String(totalPage) } }"
+          :to="{ query: { page: String(totalPage) } }"
           class="flex align-center justify-center page-button hover:bg-teal-200 focus:outline-none">
           {{ totalPage }}
         </nuxt-link>
       </div>
       <nuxt-link
         v-if="currentPage < totalPage"
-        :to="{ path: 'pagination', query: { page: String(currentPage + 1) } }"
+        :to="{ query: { page: String(currentPage + 1) } }"
         class="arrow-button ml-1 hover:bg-teal-200 focus:outline-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"

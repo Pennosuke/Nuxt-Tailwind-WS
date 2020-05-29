@@ -19,13 +19,18 @@ import pagination from '~/components/pagination.vue'
 import { pokemonMapper } from '~/utils/pokemonMapper'
 
 export default {
+  watchQuery: ['page'],
+  key (route) {
+    return route.fullPath
+  },
   components: {
     pokemonList,
     searchBar,
     pagination
   },
-  async asyncData() {
-    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+  async asyncData({ route }) {
+    const pokemonListOffset = route.query.page === undefined ? 0 : String((parseInt(route.query.page) - 1) * 20)
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon/?offset=${pokemonListOffset}`
     const { data } = await axios.get(apiUrl)
     const { results } = data
     return {
@@ -46,6 +51,9 @@ export default {
     pokemons() {
       return pokemonMapper(this.results)
     }
+  },
+  created() {
+    this.currentPage = this.$route.query.page === undefined ? 1 : parseInt(this.$route.query.page)
   }
 }
 </script>
