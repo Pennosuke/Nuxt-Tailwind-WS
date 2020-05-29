@@ -53,9 +53,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.searchbar {
-  @apply rounded-full w-full py-2 px-3 text-gray-700 border shadow appearance-none leading-tight outline-none;
-}
-</style>

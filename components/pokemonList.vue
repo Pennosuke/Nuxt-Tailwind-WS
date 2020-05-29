@@ -4,7 +4,7 @@
       <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div v-for="(pokemon, index) in pokemons" :key="index" class="mx-auto">
           <nuxt-link :to="{ name: 'detail-name', params: { name: pokemon.name } }">
-            <button class="btn btn-color">
+            <button class="btn btn-color focus:outline-none">
               <img :src="imgUrl + pokemon.id + '.png'" class="w-20 h-20 mx-auto" />
               <h4>{{ pokemon.name }}</h4>
             </button>

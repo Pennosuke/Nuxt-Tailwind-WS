@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :event="disabled ? '' : 'click'" :to="to">
-    <button :class="disabled ? 'search-button disabled' : 'search-button hover:bg-gray-400'" type="button">
+    <button :class="disabled ? 'search-button disabled focus:outline-none' : 'search-button hover:bg-gray-400 focus:outline-none'" type="button">
       <svg
         class="text-gray-700 h-4 w-4 fill-current"
         xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
 .search-button {
-  @apply mr-3 flex-shrink-0 py-2 px-2 rounded-full bg-transparent;
+  @apply mr-3 flex-shrink-0 py-2 px-2 rounded-full bg-white;
 }
 .disabled {
   @apply opacity-50 cursor-not-allowed;

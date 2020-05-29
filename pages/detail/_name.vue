@@ -114,68 +114,58 @@ export default {
 .type-color {
   @apply bg-gray-800;
 }
-.type-color[data-color='bug'] {
-  background-color: #A8B820;
+.type-color[data-color="bug"] {
+  background-color: #a8b820;
 }
-.type-color[data-color='dark'] {
+.type-color[data-color="dark"] {
   background-color: #705848;
 }
-.type-color[data-color='dragon'] {
-  background-color: #7038F8;
+.type-color[data-color="dragon"] {
+  background-color: #7038f8;
 }
-.type-color[data-color='electric'] {
-  background-color: #F8D030;
+.type-color[data-color="electric"] {
+  background-color: #f8d030;
 }
-.type-color[data-color='fairy'] {
-  background-color: #EE99AC;
+.type-color[data-color="fairy"] {
+  background-color: #ee99ac;
 }
-.type-color[data-color='fighting'] {
-  background-color: #C03028;
+.type-color[data-color="fighting"] {
+  background-color: #c03028;
 }
-.type-color[data-color='fire'] {
-  background-color: #F08030;
+.type-color[data-color="fire"] {
+  background-color: #f08030;
 }
-.type-color[data-color='flying'] {
-  background-color: #A890F0;
+.type-color[data-color="flying"] {
+  background-color: #a890f0;
 }
-.type-color[data-color='ghost'] {
+.type-color[data-color="ghost"] {
   background-color: #705898;
 }
-.type-color[data-color='grass'] {
-  background-color: #78C850;
+.type-color[data-color="grass"] {
+  background-color: #78c850;
 }
-.type-color[data-color='ground'] {
-  background-color: #E0C068;
+.type-color[data-color="ground"] {
+  background-color: #e0c068;
 }
-.type-color[data-color='ice'] {
-  background-color: #98D8D8;
+.type-color[data-color="ice"] {
+  background-color: #98d8d8;
 }
-.type-color[data-color='normal'] {
-  background-color: #A8A878;
+.type-color[data-color="normal"] {
+  background-color: #a8a878;
 }
-.type-color[data-color='poison'] {
-  background-color: #A040A0;
+.type-color[data-color="poison"] {
+  background-color: #a040a0;
 }
-.type-color[data-color='psychic'] {
-  background-color: #F85888;
+.type-color[data-color="psychic"] {
+  background-color: #f85888;
 }
-.type-color[data-color='rock'] {
-  background-color: #B8A038;
+.type-color[data-color="rock"] {
+  background-color: #b8a038;
 }
-.type-color[data-color='steel'] {
-  background-color: #B8B8D0;
+.type-color[data-color="steel"] {
+  background-color: #b8b8d0;
 }
-.type-color[data-color='water'] {
-  background-color: #6890F0;
-}
-.ability {
-  margin-bottom: 10px;
-  margin-inline: 5px;
-  padding-top: 5px;
-  padding-inline: 10px;
-  border-radius: 30px;
-  color: #ffffff;
-  letter-spacing: 2px;
-  background-color: #44685E;
+.type-color[data-color="water"] {
+  background-color: #6890f0;
 }
 </style>
