@@ -37,7 +37,7 @@
       <div class="flex h-6 sm:h-8 md:h-10 lg:h-12 font-medium rounded-full bg-gray-300">
         <nuxt-link
           v-if="showFirstPage"
-          :to="{ query: { page: String(1) } }"
+          to="/"
           class="flex align-center justify-center page-button hover:bg-teal-200 focus:outline-none">
           1
         </nuxt-link>
@@ -45,12 +45,12 @@
           ...
         </div>
         <div v-for="(page,index) in middlePages" :key="index" class="flex align-center justify-center">
-          <div v-if="page===currentPage" class="flex align-center justify-center page-button bg-teal-600 text-white">
+          <div v-if="page === currentPage" class="flex align-center justify-center page-button bg-teal-600 text-white">
             {{ page }}
           </div>
           <nuxt-link
             v-else
-            :to="{ query: { page: String(page) } }"
+            :to="page === 1 ? {} : { query: { page: String(page) } }"
             class="flex align-center justify-center page-button hover:bg-teal-200 focus:outline-none">
             {{ page }}
           </nuxt-link>
