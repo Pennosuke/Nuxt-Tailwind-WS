@@ -9,7 +9,7 @@
         @keyup.enter="searchByEnter(searchText)">
       <search-bar-button
         :disabled="!searchText"
-        :to="{ path: 'search', query: { name: searchText } }">
+        :to="{ query: { name: searchText } }">
       </search-bar-button>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
   methods: {
     searchByEnter(pokemonName) {
       if (pokemonName !== '') {
-        this.$router.push({ path: 'search', query: { name: pokemonName } })
+        this.$router.push({ query: { name: pokemonName } })
       }
     }
   }
