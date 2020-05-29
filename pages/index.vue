@@ -53,12 +53,7 @@ export default {
   },
   computed: {
     pokemons() {
-      // console.log('this.$route.query.page', this.$route.query.page)
-      // console.log('this.$route.query.name', this.$route.query.name)
       const fetchResults = this.$route.query.name === undefined ? this.results : this.results.filter(({ name }) => this.regex.test(name))
-      // console.log('regex', regex)
-      // console.log('this.results', this.results)
-      // console.log('fetchResults', fetchResults)
       return pokemonMapper(fetchResults)
     }
   },

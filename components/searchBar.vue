@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto w-2/3 py-10 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+  <div class="mx-auto w-2/3 pb-10 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
     <div class="flex items-center rounded-full border border-teal-500 py-2">
       <input
         v-model="searchText"
